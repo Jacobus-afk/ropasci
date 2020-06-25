@@ -1,9 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => { 
 
+    const buttons = document.querySelectorAll("input");
+
     const RPS_Choices = [ "rock", "paper", "scissors" ]
     const Match_Results = { draw: 0, loss: 0, win: 0 }
     
-    let playerSelection = null;
+    // let playerSelection = null;
     let match_result = null;
 
     function computerPlay() {
@@ -11,7 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
         return RPS_Choices[computer_choice];
     }
 
-    function playRound(playerSelection, computerSelection) {
+    function playRound(event) {
+        console.log(event.target.value);
+        let playerSelection = event.target.value;
+        let computerSelection = computerPlay();
         playerIndex = RPS_Choices.indexOf(playerSelection);
         computerIndex = RPS_Choices.indexOf(computerSelection);
 
@@ -35,10 +40,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    function game() {
+    function game(playerSelection) {
         for (i = 0; i < 5; i ++) {
             // console.log(i);
-            playerSelection = prompt("Rock, Paper or Scissors?").toLowerCase();
+            // playerSelection = prompt("Rock, Paper or Scissors?").toLowerCase();
             if (!RPS_Choices.includes(playerSelection)) {
                 alert("Invalid selection");
                 i--;
@@ -51,6 +56,5 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         console.log("Match results: " + calcResults());
     }
-
-    game();
+    buttons.forEach(button => button.addEventListener("click", playRound));
 })
