@@ -1,0 +1,22 @@
+
+main {
+    width: 50vw;
+    padding: 20px;
+}
+
+#results-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 40px ;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    background-color: lightgrey;
+    width: 100vw;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}

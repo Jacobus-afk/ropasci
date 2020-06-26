@@ -4,11 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="static/styles.css">
 </head>
 <body>
-    <input type="button" value="rock">
-    <input type="button" value="paper">
-    <input type="button" value="scissors">
+    <main>
+        <div id="results-container">
+            <div>
+                <label>Wins: </label>
+                <div class=results data-result="win">0</div>
+            </div>
+            <div>
+                <label>Losses: </label>
+                <div class=results data-result="loss">0</div>
+            </div>
+            <div>
+                <label>Draws: </label>
+                <div class=results data-result="draw">0</div>
+            </div>
+        </div>
+    
+    
+        <input type="button" value="rock">
+        <input type="button" value="paper">
+        <input type="button" value="scissors">
+    </main>
+
+
+    <footer></footer>
 </body>
 
 <script src="static/main.js"></script>

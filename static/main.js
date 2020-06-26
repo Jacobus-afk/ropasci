@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => { 
 
     const buttons = document.querySelectorAll("input");
-
+    const footer = document.querySelector("footer");
     const RPS_Choices = [ "rock", "paper", "scissors" ]
     const Match_Results = { draw: 0, loss: 0, win: 0 }
-    
+    // let nrOfRounds = 0;
     // let playerSelection = null;
     let match_result = null;
 
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function playRound(event) {
-        console.log(event.target.value);
+        // console.log(event.target.value);
         let playerSelection = event.target.value;
         let computerSelection = computerPlay();
         playerIndex = RPS_Choices.indexOf(playerSelection);
@@ -33,28 +33,43 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function calcResults() {
-        switch (Object.entries(Match_Results).sort((a,b) => b[1]-a[1])[0][0]) {
-            case "draw": return "It was a draw";
-            case "win": return "You won";
-            case "loss": return "You lost";
+        if (Match_Results.loss >= 5) {
+            alert("You lost");
         }
+        else if (Match_Results.win >= 5) {
+            alert("You won");
+        }
+        else {
+            return;
+        }
+        location.reload();
     }
 
-    function game(playerSelection) {
-        for (i = 0; i < 5; i ++) {
+    function game(event) {
+        
+        // for (i = 0; i < 5; i ++) {
             // console.log(i);
             // playerSelection = prompt("Rock, Paper or Scissors?").toLowerCase();
-            if (!RPS_Choices.includes(playerSelection)) {
-                alert("Invalid selection");
-                i--;
-                continue;
-            }
+            // if (!RPS_Choices.includes(playerSelection)) {
+            //     alert("Invalid selection");
+            //     i--;
+            //     continue;
+            // }
+        // console.log("got here");
+        match_result = playRound(event);
+        const results_div = document.querySelector(`div[data-result="${match_result.result}"]`);
+        // console.log(results_div.textContent);
+        results_div.textContent = Number(results_div.textContent) + 1;
+        // console.log(match_result.verbose);
+        Match_Results[match_result.result]++;
+        footer.textContent = match_result.verbose;
 
-            match_result = playRound(playerSelection, computerPlay());
-            console.log(match_result.verbose);
-            Match_Results[match_result.result]++;
-        }
-        console.log("Match results: " + calcResults());
+        // const result = Object.entries(Match_Results).filter((entry) => entry[1] >= 5);
+        
+        calcResults(result);
+
+        // }
+        // console.log("Match results: " + calcResults());
     }
-    buttons.forEach(button => button.addEventListener("click", playRound));
+    buttons.forEach(button => button.addEventListener("click", game));
 })
